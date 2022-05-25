@@ -26,7 +26,11 @@ public class MarsRoverShould {
 
     private static Stream<Arguments> rotateInputs() {
         return Stream.of(
-                arguments("R", "0:0:E")
+                arguments("R", "0:0:E"),
+                arguments("RR", "0:0:S"),
+                arguments("RRR", "0:0:W"),
+                arguments("RRRR", "0:0:N"),
+                arguments("RRRRR", "0:0:E")
         );
     }
     @ParameterizedTest

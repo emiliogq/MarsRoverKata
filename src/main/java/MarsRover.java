@@ -1,14 +1,19 @@
 public class MarsRover {
 
+    public static final int NORTH_DIRECTION = 0;
+
     public String execute(String commands) {
         String position;
         int forward = 0;
-        char direction = 'N';
+
+        final char[] directions = {'N', 'E', 'S', 'W'} ;
+        int directionIndex = NORTH_DIRECTION;
 
         final char[] commandsArray = commands.toCharArray();
+
         for(char move : commandsArray){
             if (move == 'R') {
-                direction = 'E';
+                directionIndex = (directionIndex+1) % directions.length ;
             } else {
                 forward++;
             }
@@ -16,7 +21,7 @@ public class MarsRover {
         if (forward >= 10){
             forward = 0;
         }
-        position = "0:"+forward+":"+direction;
+        position = "0:"+forward+":"+directions[directionIndex];
         return position;
     }
 }
