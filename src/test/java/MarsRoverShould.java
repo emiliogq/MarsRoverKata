@@ -1,28 +1,39 @@
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
+
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class MarsRoverShould {
-    @Test
-    void moveOneSpaceNorth() {
+
+    private static Stream<Arguments> moveNorthInputs() {
+        return Stream.of(
+                arguments("M", "0:1:N"),
+                arguments("MM", "0:2:N"),
+                arguments("MMM", "0:3:N"),
+                arguments("MMMMMMMMMM", "0:0:N")
+        );
+    }
+    @ParameterizedTest
+    @MethodSource("moveNorthInputs")
+    void moveNorth(String command, String expectedPosition) {
         MarsRover marsRover = new MarsRover();
-        Assertions.assertEquals(marsRover.execute("M"), "0:1:N");
+        Assertions.assertEquals(marsRover.execute(command), expectedPosition);
     }
 
-    @Test
-    void moveTwoSpacesNorth() {
+    private static Stream<Arguments> rotateInputs() {
+        return Stream.of(
+                arguments("R", "0:0:E")
+        );
+    }
+    @ParameterizedTest
+    @MethodSource("rotateInputs")
+    void rotate(String command, String expectedPosition) {
         MarsRover marsRover = new MarsRover();
-        Assertions.assertEquals(marsRover.execute("MM"), "0:2:N");
+        Assertions.assertEquals(marsRover.execute(command), expectedPosition);
     }
 
-    @Test
-    void moveThreeSpacesNorth() {
-        MarsRover marsRover = new MarsRover();
-        Assertions.assertEquals(marsRover.execute("MMM"), "0:3:N");
-    }
-
-    @Test
-    void wrapAroundFacingNorth() {
-        MarsRover marsRover = new MarsRover();
-        Assertions.assertEquals(marsRover.execute("MMMMMMMMMM"), "0:0:N");
-    }
 }

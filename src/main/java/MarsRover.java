@@ -1,16 +1,22 @@
 public class MarsRover {
 
-    public String execute(String moves) {
-        String position = "0:1:N";
+    public String execute(String commands) {
+        String position;
         int forward = 0;
+        char direction = 'N';
 
-        for(char move : moves.toCharArray()){
-            forward++;
+        final char[] commandsArray = commands.toCharArray();
+        for(char move : commandsArray){
+            if (move == 'R') {
+                direction = 'E';
+            } else {
+                forward++;
+            }
         }
         if (forward >= 10){
             forward = 0;
         }
-        position = "0:"+forward+":N";
+        position = "0:"+forward+":"+direction;
         return position;
     }
 }
