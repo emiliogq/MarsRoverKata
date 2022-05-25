@@ -1,9 +1,16 @@
 public class MarsRover {
 
-    public String execute(String m) {
-        if (m == "MM") {
-            return "0:2:N";
+    public String execute(String moves) {
+        String position = "0:1:N";
+        int forward = 0;
+
+        for(char move : moves.toCharArray()){
+            forward++;
         }
-        return "0:1:N";
+        if (forward >= 10){
+            forward = 0;
+        }
+        position = "0:"+forward+":N";
+        return position;
     }
 }

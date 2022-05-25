@@ -13,4 +13,16 @@ public class MarsRoverShould {
         MarsRover marsRover = new MarsRover();
         Assertions.assertEquals(marsRover.execute("MM"), "0:2:N");
     }
+
+    @Test
+    void moveThreeSpacesNorth() {
+        MarsRover marsRover = new MarsRover();
+        Assertions.assertEquals(marsRover.execute("MMM"), "0:3:N");
+    }
+
+    @Test
+    void wrapAroundFacingNorth() {
+        MarsRover marsRover = new MarsRover();
+        Assertions.assertEquals(marsRover.execute("MMMMMMMMMM"), "0:0:N");
+    }
 }
