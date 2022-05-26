@@ -1,12 +1,8 @@
+import java.util.ArrayList;
+
 public class MarsRover {
     public String execute(String commands) {
-        String position;
-        int forward = 0;
-
-
-        final char[] directions = {'N', 'E', 'S', 'W'} ;
-        int directionIndex = NORTH_DIRECTION;
-
+        ArrayList<RoverCommand> roverCommands = new ArrayList<>();
         final char[] commandsArray = commands.toCharArray();
         Rover rover = new Rover();
 
@@ -16,14 +12,15 @@ public class MarsRover {
                  command = new RotateRight(rover);
             } else if (move == 'L') {
                 command = new RotateLeft(rover);
-            } else if (move == 'M'){
+            } else {
                 command = new Move(rover);
             }
+            roverCommands.add(command);
         }
-        if (forward >= 10){
-            forward = 0;
+        for(RoverCommand command : roverCommands){
+            command.execute();
         }
-        position = "0:"+forward+":"+directions[directionIndex];
-        return position;
+        Position position = rover.getPosition();
+        return position.getX()+":"+ position.getY()+":"+rover.getDirection();
     }
 }

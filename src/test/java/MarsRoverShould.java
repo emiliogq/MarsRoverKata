@@ -19,17 +19,17 @@ public class MarsRoverShould {
 
     private static Stream<Arguments> moveNorthInputs() {
         return Stream.of(
-                arguments("M", "0:1:N"),
-                arguments("MM", "0:2:N"),
-                arguments("MMM", "0:3:N"),
-                arguments("MMMMMMMMMM", "0:0:N")
+                arguments("0:1:N", "M"),
+                arguments("0:2:N", "MM"),
+                arguments("0:3:N", "MMM"),
+                arguments("0:0:N", "MMMMMMMMMM")
         );
     }
 
     @ParameterizedTest
     @MethodSource("moveNorthInputs")
-    void moveUp(String command, String expectedPosition) {
-        Assertions.assertEquals(marsRover.execute(command), expectedPosition);
+    void moveUp(String expectedPosition, String command) {
+        Assertions.assertEquals(expectedPosition, marsRover.execute(command));
     }
 
     private static Stream<Arguments> rotateRightInputs() {
@@ -43,8 +43,8 @@ public class MarsRoverShould {
     }
     @ParameterizedTest
     @MethodSource("rotateRightInputs")
-    void rotate(String command, String expectedPosition) {
-        Assertions.assertEquals(marsRover.execute(command), expectedPosition);
+    void rotateRight(String command, String expectedPosition) {
+        Assertions.assertEquals(expectedPosition, marsRover.execute(command));
     }
 
     private static Stream<Arguments> rotateLeftInputs() {
@@ -60,7 +60,7 @@ public class MarsRoverShould {
     @ParameterizedTest
     @MethodSource("rotateLeftInputs")
     void rotateLeft(String command, String expectedPosition) {
-        Assertions.assertEquals(marsRover.execute(command), expectedPosition);
+        Assertions.assertEquals(expectedPosition, marsRover.execute(command));
     }
 
 

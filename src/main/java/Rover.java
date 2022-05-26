@@ -3,11 +3,13 @@ import java.awt.*;
 public class Rover {
 
 
+    private static final int MAX_WEIGHT = 10;
+    private static final int MAX_HEIGHT = 10;
     private Direction direction;
     private Position position;
 
     public Rover() {
-
+        this.direction = new Direction();
         this.position = new Position(0,0);
     }
 
@@ -26,19 +28,29 @@ public class Rover {
         char direction = this.direction.getDirection();
 
         if (direction == 'N'){
-            x++;
-        }
-        else if (direction == 'E'){
             y++;
         }
-        else if (direction == 'S'){
-            x--;
+        else if (direction == 'E'){
+            x++;
         }
-        else {
+        else if (direction == 'S'){
             y--;
         }
+        else if (direction == 'W'){
+            x--;
+        }
+        x = x % MAX_WEIGHT;
+        y = y % MAX_HEIGHT;
 
         position.setX(x);
         position.setY(y);
+    }
+
+    public Position getPosition() {
+        return position;
+    }
+
+    public char getDirection() {
+        return direction.getDirection();
     }
 }
