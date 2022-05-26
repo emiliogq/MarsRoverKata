@@ -63,4 +63,5 @@ public class MarsRoverShould {
         Assertions.assertEquals(marsRover.execute(command), expectedPosition);
     }
 
+
 }

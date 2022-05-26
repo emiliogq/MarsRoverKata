@@ -1,24 +1,23 @@
 public class MarsRover {
-
-    public static final int NORTH_DIRECTION = 0;
-
     public String execute(String commands) {
         String position;
         int forward = 0;
+
 
         final char[] directions = {'N', 'E', 'S', 'W'} ;
         int directionIndex = NORTH_DIRECTION;
 
         final char[] commandsArray = commands.toCharArray();
+        Rover rover = new Rover();
 
         for(char move : commandsArray){
+            RoverCommand command;
             if (move == 'R') {
-                directionIndex = (directionIndex + 1) % directions.length;
+                 command = new RotateRight(rover);
             } else if (move == 'L') {
-                directionIndex -= 1;
-                directionIndex = directionIndex == -1 ? directions.length - 1 : directionIndex;
-            } else {
-                forward++;
+                command = new RotateLeft(rover);
+            } else if (move == 'M'){
+                command = new Move(rover);
             }
         }
         if (forward >= 10){
