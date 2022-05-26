@@ -11,9 +11,11 @@ public class Direction {
     }
 
     public void rotateLeft() {
-        int x = directionIndex-1;
-        int y = directions.length;
-        directionIndex = (x < 0) ? (y - (Math.abs(x) % y) ) % y : (x % y);
+        directionIndex = getPositiveIndex(directionIndex-1, directions.length);
+    }
+
+    private int getPositiveIndex(int x, int y) {
+        return (x < 0) ? (y - (Math.abs(x) % y)) % y : (x % y);
     }
 
     public char getDirection() {
