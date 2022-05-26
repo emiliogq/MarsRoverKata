@@ -1,11 +1,34 @@
 import java.util.ArrayList;
 
 public class MarsRover {
+    private static final int MAX_WIDTH = 10;
+    private static final int MAX_HEIGHT = 10;
+    private final Grid grid;
+    private final Rover rover;
+
+    public MarsRover() {
+        grid = new Grid(MAX_WIDTH, MAX_HEIGHT);
+        rover = new Rover();
+    }
+
+    public void addObstacle(int x, int y) {
+        grid.addObstacle(x, y);
+    }
+
     public String execute(String commands) {
         ArrayList<RoverCommand> roverCommands = new ArrayList<>();
-        final char[] commandsArray = commands.toCharArray();
-        Rover rover = new Rover();
 
+        buildCommands(commands, roverCommands);
+
+        for(RoverCommand command : roverCommands){
+            command.execute();
+        }
+
+        return rover.toString();
+    }
+
+    private void buildCommands(String commands, ArrayList<RoverCommand> roverCommands) {
+        final char[] commandsArray = commands.toCharArray();
         for(char move : commandsArray){
             RoverCommand command;
             if (move == 'R') {
@@ -13,14 +36,9 @@ public class MarsRover {
             } else if (move == 'L') {
                 command = new RotateLeft(rover);
             } else {
-                command = new Move(rover);
+                command = new Move(grid, rover);
             }
             roverCommands.add(command);
         }
-        for(RoverCommand command : roverCommands){
-            command.execute();
-        }
-        Position position = rover.getPosition();
-        return position.getX()+":"+ position.getY()+":"+rover.getDirection();
     }
 }

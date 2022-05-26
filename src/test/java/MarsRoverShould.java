@@ -57,11 +57,43 @@ public class MarsRoverShould {
 
         );
     }
+
     @ParameterizedTest
     @MethodSource("rotateLeftInputs")
     void rotateLeft(String command, String expectedPosition) {
         Assertions.assertEquals(expectedPosition, marsRover.execute(command));
     }
 
+    private static Stream<Arguments> moveUpWithObstaclesInput() {
+        return Stream.of(
+                arguments("M", "0:0:0:N"),
+                arguments("MMMMMMMM", "0:0:0:N")
 
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("moveUpWithObstaclesInput")
+    void moveUpWithObstacles(String command, String expectedPosition) {
+        marsRover.addObstacle(0,1);
+        marsRover.addObstacle(0, 9);
+
+        Assertions.assertEquals(expectedPosition, marsRover.execute(command));
+    }
+
+    private static Stream<Arguments> moveLeftWithObstaclesInput() {
+        return Stream.of(
+                arguments("LMMM", "0:0:0:N"),
+                arguments("MMMMMMMM", "0:0:0:N")
+
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("moveLeftWithObstaclesInput")
+    void moveUpLeftObstacles(String command, String expectedPosition) {
+        marsRover.addObstacle(0,1);
+        marsRover.addObstacle(0, 9);
+        Assertions.assertEquals(expectedPosition, marsRover.execute(command));
+    }
 }
