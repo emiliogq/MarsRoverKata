@@ -13,7 +13,10 @@ public class MarsRover {
 
         for(char move : commandsArray){
             if (move == 'R') {
-                directionIndex = (directionIndex+1) % directions.length ;
+                directionIndex = (directionIndex + 1) % directions.length;
+            } else if (move == 'L') {
+                directionIndex -= 1;
+                directionIndex = directionIndex == -1 ? directions.length - 1 : directionIndex;
             } else {
                 forward++;
             }

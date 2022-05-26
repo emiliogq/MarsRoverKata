@@ -30,8 +30,11 @@ public class MarsRoverShould {
                 arguments("RR", "0:0:S"),
                 arguments("RRR", "0:0:W"),
                 arguments("RRRR", "0:0:N"),
-                arguments("RRRRR", "0:0:E")
-        );
+                arguments("RRRRR", "0:0:E"),
+                arguments("L", "0:0:W"),
+                arguments("LL", "0:0:S")
+
+                );
     }
     @ParameterizedTest
     @MethodSource("rotateInputs")
